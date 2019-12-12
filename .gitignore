@@ -1,13 +1,7 @@
 *.pyc
 *~
-<<<<<<< Updated upstream
 __pycache__/
 myvenv/
 db.sqlite3
 /static/
-=======
-__pycache__
-myvenv
-db.sqlite3
->>>>>>> Stashed changes
 .DS_Store
