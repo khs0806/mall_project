@@ -1,13 +1,17 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
-from .forms import RegisterForm, LoginForm
+from django.utils import timezone
 from django.contrib.auth.hashers import make_password
+
+from .forms import RegisterForm, LoginForm
 from .models import Fcuser
+from product.models import Product
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html', { 'email' : request.session.get('user')})
+    posts = Product.objects.filter(register_date__lte=timezone.now()).order_by('register_date')
+    return render(request, 'index.html', { 'email' : request.session.get('user'), 'posts': posts})
 
 class RegisterView(FormView):
     template_name = 'register.html'

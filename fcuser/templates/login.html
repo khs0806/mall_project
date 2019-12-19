@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block contents %}
-<div class="row mt-5">
-    <div class="col-12 text-center">
+<div class="row">
+    <div class="col-md-8 text-center">
         <h1>로그인</h1>
     </div>
 </div>
-<div class="row mt-5">
-    <div class="col-12">
+<div class="row">
+    <div class="col-md-8">
         {{error}}
     </div>
 </div>
-<div class="row mt-5">
-    <div class="col-12">
+<div class="row">
+    <div class="col-md-8">
         <form method="POST" action=".">
             {% csrf_token %}
             {% for field in form %}

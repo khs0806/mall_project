@@ -3,10 +3,7 @@
 {% block contents %}
 <div class="row mt-5">
  <div class="col-12">
-    <div class="card" style="width: 100%">
-        <div class="card-body">
-          <h5 class="card-title">{{ product.name }}</h5>
-        </div>
+        <h3>{{ product.name }}</h3>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <form method="POST" action="/order/create/">
@@ -33,12 +30,14 @@
           <li class="list-group-item">{{ product.description | safe }}</li>
           
         </ul>
-    </div>
+    
  </div>
 </div>
 <div class="row">
-  <div class="col-12">
-    <a href="/product/">목록보기</a>
+  <div class="col-md-8">
+    <a href="/product/">
+      <button type="button" class="btn btn-outline-warning">목록보기</button>
+    </a>
   </div>
 </div>
 {% endblock %}

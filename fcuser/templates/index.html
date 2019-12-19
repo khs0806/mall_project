@@ -1,5 +1,42 @@
 {% extends "base.html" %}
+{% block header %}
+<script>
+  function product_detail(id){
+    $.ajax({
+      url: "/api/product/" + id,
+      success: function(result){
+        $("#product-" + id).popover({
+          html: true,
+          content: result.name + "</br>" + result.price
+        }).popover('show');
+      }
+    });
+  }
+
+  function product_leave(id){
+    $("#product-" + id).popover('hide');
+  }
+  $(document).ready(function(){
+  }); 
+</script>  
+{% endblock %}
 {% block contents %}
-Hello World!
-{{ email }}
+<div class="btn-group btn-group-justified">
+    <a href="/login/" class="btn btn-success">로그인</a>
+    <a href="/register/" class="btn btn-info">회원가입</a>
+    <a href="/product/create/" class="btn btn-warning">글작성하기</a>
+  </div>
+  <br>
+  {% for post in posts %}
+        <ul class="list-group">
+            <li class="list-group-item">
+                {{ post.register_date }}
+            </li>
+            <li class="list-group-item">
+            <h1><a id="product-{{ post.id }}" onmouseenter="product_detail({{ post.id }});" 
+              onmouseleave="product_leave({{ post.id }})" href="{% url 'post_detail' pk=post.pk %}">{{ post.name }}</a></h1>
+            <p>{{ post.description|safe }}</p>
+          </li>
+          </ul>
+    {% endfor %}
 {% endblock %}
