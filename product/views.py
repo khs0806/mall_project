@@ -9,7 +9,7 @@ from .models import Product
 from .forms import RegisterForm 
 from order.forms import RegisterForm as OrderForm
 from .serializers import ProductSerializer
-from fcuser.decorators import admin_required
+from fcuser.decorators import admin_required, login_required
 
 # Create your views here.
 
@@ -36,7 +36,7 @@ class ProductList(ListView):
     template_name = 'product.html'
     context_object_name = 'product_list'
 
-@method_decorator(admin_required, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class ProductCreate(FormView):
     template_name = 'register_product.html'
     form_class = RegisterForm
@@ -45,9 +45,9 @@ class ProductCreate(FormView):
     def form_valid(self, form):
         product = Product(
                     name=form.data.get('name'),
-                    price=form.data.get('price'),
+                    price=123456789,
                     description=form.data.get('description'),
-                    stock=form.data.get('stock')
+                    stock=1
                 )
         product.save()
         return super().form_valid(form)
