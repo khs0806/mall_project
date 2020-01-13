@@ -41,3 +41,7 @@ def logout(request):
         del(request.session['user'])
     return redirect('/')
 
+def delete(request, post_id):
+    cat = Product.objects.get(id=post_id)
+    cat.delete()
+    return redirect('/')
