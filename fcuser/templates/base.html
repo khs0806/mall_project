@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-{% load static %}
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>효성동사람들</title>
+        <title>KHS</title>
+        {% load static %}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -18,12 +18,12 @@
         {% endblock %}
     </head>
     <body>
-    <div class="page-header">
+    <div class="page-header">   
         <h1><a href="/">KHS's Blog</a></h1>
         {% if email %}
         <h3>{{ email }} 님 반갑습니다.</h3>
         <a href="/logout/">
-        <span class="label label-info">로그아웃</span>
+        <span class="content">로그아웃</span>
         </a>    
         {% endif %}
     </div>
