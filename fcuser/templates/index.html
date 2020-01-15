@@ -33,8 +33,8 @@
                 {{ post.register_date }}
             </li>
             <li class="list-group-item">
-            <h1><a id="product-{{ post.id }}" onmouseenter="product_detail({{ post.id }});" 
-              onmouseleave="product_leave({{ post.id }})" href="{% url 'post_detail' pk=post.pk %}">{{ post.name }}</a></h1>
+            <h2><a id="product-{{ post.id }}" onmouseenter="product_detail({{ post.id }});" 
+              onmouseleave="product_leave({{ post.id }})" href="{% url 'post_detail' pk=post.pk %}">{{ post.name }}</a></h2>
             <p>{{ post.description|safe }}</p>
             <div class="delete">
               <p><a href="{% url 'delete' post.id %}">삭제</a></p>  
