@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
 from django.utils.decorators import method_decorator
@@ -6,7 +6,7 @@ from rest_framework import generics
 from rest_framework import mixins
 
 from .models import Product
-from .forms import RegisterForm 
+from .forms import RegisterForm
 from order.forms import RegisterForm as OrderForm
 from .serializers import ProductSerializer
 from fcuser.decorators import admin_required, login_required
@@ -61,4 +61,16 @@ class ProductDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['form'] = OrderForm(self.request)
         return context
-    
+
+def post_edit(request, pk):
+    post = get_object_or_404(Product, pk=pk)
+    if request.method == "POST":
+        form = RegisterForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post_detail', pk=pk)
+    else:
+        form = RegisterForm(instance=post)
+    return render(request, 'edit_product.html', {'form': form})

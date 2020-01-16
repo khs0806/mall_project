@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from fcuser.views import (
-    index, logout, RegisterView, 
+    index, logout, RegisterView,
     LoginView, delete
 )
 from product.views import (
     ProductList, ProductCreate, ProductDetail,
-    ProductListAPI, ProductDetailAPI
+    ProductListAPI, ProductDetailAPI, post_edit
     )
 from order.views import OrderCreate, OrderList
 urlpatterns = [
@@ -34,10 +34,12 @@ urlpatterns = [
     path('product/<int:pk>/', ProductDetail.as_view(), name='post_detail'),
     path('product/create/', ProductCreate.as_view()),
     path('product/<int:post_id>/delete', delete, name='delete'),
+    path('product/<int:pk>/edit/', post_edit, name='edit'),
+
     path('order/', OrderList.as_view()),
     path('order/create/', OrderCreate.as_view()),
 
     path('api/product/', ProductListAPI.as_view()),
     path('api/product/<int:pk>/', ProductDetailAPI.as_view()),
-    
+
 ]
