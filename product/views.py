@@ -62,15 +62,16 @@ class ProductDetail(DetailView):
         context['form'] = OrderForm(self.request)
         return context
 
-def post_edit(request, pk):
-    post = get_object_or_404(Product, pk=pk)
+def edit(request, post_id):
+    product = get_object_or_404(Product, pk=post_id)
+    print(request.method)
     if request.method == "POST":
-        form = RegisterForm(request.POST, instance=post)
+        form = RegisterForm(request.POST, instance=product)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('post_detail', pk=pk)
+            return redirect('index')
     else:
-        form = RegisterForm(instance=post)
-    return render(request, 'edit_product.html', {'form': form})
+        form = RegisterForm(instance=product)
+    return render(request, 'edit_product.html', {'form': form, 'product':product})    

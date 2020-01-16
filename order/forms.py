@@ -13,6 +13,7 @@ class RegisterForm(forms.Form):
             'required':'수량을 입력해주세요.'
         }, label='수량'
     )
+    
     product = forms.IntegerField(
         error_messages={
             'required':'상품설명을 입력해주세요.'

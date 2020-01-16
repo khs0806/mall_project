@@ -1,7 +1,7 @@
 from django import forms
 from .models import Product
 
-class RegisterForm(forms.Form):
+class RegisterForm(forms.ModelForm):
     name = forms.CharField(
         error_messages={
             'required':'제목을 입력해주세요.'
@@ -13,7 +13,7 @@ class RegisterForm(forms.Form):
             'required':'내용을 입력해주세요.'
         }, label='내용'
     )
-
+    
     def clean(self):
         cleaned_data = super().clean()
         name = cleaned_data.get('name')
@@ -21,5 +21,9 @@ class RegisterForm(forms.Form):
 
         if not (name and description ):
             self.add_error('name', '값이 없습니다.')
+    
+    class Meta:
+        model = Product
+        fields = ('name', 'description',)
 
             

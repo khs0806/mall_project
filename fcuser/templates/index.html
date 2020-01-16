@@ -21,9 +21,11 @@
 </script>
 {% endblock %}
 {% block contents %}
-<div class="btn-group btn-group-justified">
+  <div class="btn-group btn-group-justified">
+  {% if not email %}
     <a href="/login/" class="btn btn-success">로그인</a>
     <a href="/register/" class="btn btn-info">회원가입</a>
+  {% endif %}
     <a href="/product/create/" class="btn btn-warning">글작성하기</a>
   </div>
   <br>
@@ -31,17 +33,18 @@
         <ul class="list-group">
             <li class="list-group-item">
                 {{ post.register_date }}
+                
             </li>
             <li class="list-group-item">
             <h2><a id="product-{{ post.id }}" onmouseenter="product_detail({{ post.id }});"
               onmouseleave="product_leave({{ post.id }})" href="{% url 'post_detail' pk=post.pk %}">{{ post.name }}</a></h2>
             <p>{{ post.description|safe }}</p>
             {% if email %}
-            <div class="delete">
-            <a href="{% url 'delete' post.id %}">삭제</a>
-            <a class="btn btn-default" href="{% url 'edit' post.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <div>
+              <a class="btn btn-default" href="{% url 'delete' post.id %}">삭제하기</a>
+              <a class="btn btn-default" href="{% url 'edit' post.id %}">수정하기</a>
             </div>
-            {% endif %}
+            {% endif %} 
           </li>
           </ul>
     {% endfor %}
